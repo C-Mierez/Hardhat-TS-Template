@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { constants } from "ethers";
 import { parseEther } from "ethers/lib/utils";
 import { getUnnamedAccounts } from "hardhat";
-import { BaseErrors } from "../shared/errors";
-import { approveERC20, faucetTestERC20 } from "../shared/utils";
+import { Errors } from "../shared/utils/errors";
+import { approveERC20, faucetTestERC20 } from "../shared/utils/utils";
 
 export function shouldWithdraw() {
   const toDeposit = parseEther("1");
@@ -54,7 +54,7 @@ export function shouldWithdraw() {
 
       const tx = bank.connect(alice).withdraw(token.address, 0);
 
-      await expect(tx).to.be.revertedWith(BaseErrors.ZeroValue);
+      await expect(tx).to.be.revertedWith(Errors.Base.ZeroValue);
     });
 
     it("should revert if balance is lower than requested withdrawal", async function () {
@@ -80,7 +80,7 @@ export function shouldWithdraw() {
         .connect(alice)
         .withdraw(constants.AddressZero, toWithdraw);
 
-      await expect(tx).to.be.revertedWith(BaseErrors.ZeroAddress);
+      await expect(tx).to.be.revertedWith(Errors.Base.ZeroAddress);
     });
 
     it("should not allow withdrawing an unauthorized token", async function () {

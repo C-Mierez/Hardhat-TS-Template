@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { constants } from "ethers";
 import { ethers } from "hardhat";
 import { UselessBank__factory } from "../../typechain-types/factories/contracts/UselessBank__factory";
-import { BaseErrors } from "../shared/errors";
+import { Errors } from "../shared/utils/errors";
 import { shouldDeposit } from "./deposit.spec";
 import { shouldWithdraw } from "./withdraw.spec";
 
@@ -29,7 +29,7 @@ export function testUselessBank() {
             )) as UselessBank__factory
           ).deploy(address);
 
-          await expect(tx).to.be.revertedWith(BaseErrors.ZeroAddress);
+          await expect(tx).to.be.revertedWith(Errors.Base.ZeroAddress);
         });
       });
     });

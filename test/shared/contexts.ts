@@ -1,14 +1,14 @@
-import { deployments, ethers, waffle } from "hardhat";
+import hre, { deployments, ethers, waffle } from "hardhat";
 
 /**
  * This is the definition of the global context.
  * It initializes all the attributes that can be needed globally in the underlying tests.
  *
  */
-export function baseContext(name: string, hooks: () => void) {
+export function baseContext(name: string, tests: () => void) {
   describe(name, async function () {
     before("Set up signers", async function () {
-      const signers = waffle.provider.getWallets();
+      const signers = await hre.ethers.getSigners();
 
       this.namedSigners = {
         deployer: signers[0],
@@ -30,6 +30,6 @@ export function baseContext(name: string, hooks: () => void) {
       };
     });
 
-    hooks();
+    tests();
   });
 }

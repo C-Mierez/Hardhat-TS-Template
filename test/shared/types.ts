@@ -1,23 +1,23 @@
-import { Wallet } from "@ethersproject/wallet";
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { TestToken, UselessBank } from "../../typechain-types";
 
 declare module "mocha" {
   export interface Context {
     contracts: Contracts;
     namedSigners: Signers;
-    unnamedSigners: Wallet[];
+    unnamedSigners: SignerWithAddress[];
   }
 }
 
 export interface Signers {
   // Semantic Users
-  deployer: Wallet;
+  deployer: SignerWithAddress;
 
   // Other Users
-  alice: Wallet;
-  bob: Wallet;
-  charlie: Wallet;
-  dave: Wallet;
+  alice: SignerWithAddress;
+  bob: SignerWithAddress;
+  charlie: SignerWithAddress;
+  dave: SignerWithAddress;
 }
 
 // Expand this interface with all the contracts needed

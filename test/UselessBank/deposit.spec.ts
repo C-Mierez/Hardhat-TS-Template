@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { constants } from "ethers";
 import { parseEther } from "ethers/lib/utils";
 import { getUnnamedAccounts } from "hardhat";
-import { BaseErrors } from "../shared/errors";
-import { approveERC20, faucetTestERC20 } from "../shared/utils";
+import { Errors } from "../shared/utils/errors";
+import { approveERC20, faucetTestERC20 } from "../shared/utils/utils";
 
 export function shouldDeposit() {
   const toDeposit = parseEther("1");
@@ -55,7 +55,7 @@ export function shouldDeposit() {
 
       const tx = bank.connect(alice).deposit(token.address, 0);
 
-      await expect(tx).to.be.revertedWith(BaseErrors.ZeroValue);
+      await expect(tx).to.be.revertedWith(Errors.Base.ZeroValue);
     });
 
     it("should not allow a zero address as token", async function () {
@@ -64,7 +64,7 @@ export function shouldDeposit() {
 
       const tx = bank.connect(alice).deposit(constants.AddressZero, toDeposit);
 
-      await expect(tx).to.be.revertedWith(BaseErrors.ZeroAddress);
+      await expect(tx).to.be.revertedWith(Errors.Base.ZeroAddress);
     });
 
     it("should not allow depositing an unauthorized token", async function () {

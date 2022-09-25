@@ -1,6 +1,6 @@
 // This is what will hopefully be automated by Typechain if https://github.com/dethcrypto/TypeChain/issues/667 is resolved
 
-export enum BaseErrors {
+enum Base {
   ZeroAddress = "ZeroAddress",
   ZeroValue = "ZeroValue",
   ZeroOrNegativeValue = "ZeroOrNegativeValue",
@@ -8,21 +8,22 @@ export enum BaseErrors {
   UnauthorizedCaller = "UnauthorizedCaller",
 }
 
-export enum TokenErrors {
-  NotEnoughBalance = "NotEnoughBalance",
-  ERC20TransferFailed = "ERC20TransferFailed",
-  MaxSupplyExceeded = "MaxSupplyExceeded",
-}
-
-export enum InitializableErrors {
+enum Initializable {
   AlreadyInitialized = "Initializable: contract is already initialized",
 }
 
-export enum ERC20Errors {
+enum ERC20 {
   InsufficientAllowance = "ERC20: insufficient allowance",
   InsufficientBalance = "ERC20: transfer amount exceeds balance",
 }
 
-export enum OwnableErrors {
+enum Ownable {
   NotOwner = "Ownable: caller is not the owner",
 }
+
+export const Errors = {
+  Base,
+  Initializable,
+  ERC20,
+  Ownable,
+};
