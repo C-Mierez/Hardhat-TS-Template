@@ -9,7 +9,7 @@ import "hardhat-gas-reporter";
 import "solidity-coverage";
 import "hardhat-deploy";
 import "@nomiclabs/hardhat-ethers";
-
+import "hardhat-contract-sizer";
 dotenv.config();
 
 // Fetch constants from .env
@@ -36,7 +36,13 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
   solidity: {
-    compilers: [{ version: "0.8.7" }, { version: "0.6.6" }],
+    compilers: [{ version: "0.8.9" }, { version: "0.6.6" }],
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
+    },
   },
   networks: {
     hardhat: {
@@ -80,6 +86,10 @@ const config: HardhatUserConfig = {
     deployer: {
       default: 0,
     },
+  },
+  contractSizer: {
+    runOnCompile: true,
+    strict: true,
   },
 };
 
