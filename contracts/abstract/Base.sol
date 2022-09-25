@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.4;
 
-import "../error/Errors.sol";
+import "../libraries/Errors.sol";
 
 /// @title Base
 /// @author @C-Mierez
@@ -11,17 +11,18 @@ import "../error/Errors.sol";
 abstract contract Base {
     /* -------------------------------- Modifiers ------------------------------- */
     modifier checkNonZeroAddress(address addr) {
-        if (addr == address(0)) revert ZeroAddress();
+        if (addr == address(0)) revert Errors.ZeroAddress();
         _;
     }
 
     modifier checkNonZeroValue(uint256 value) {
-        if (value == 0) revert ZeroValue();
+        if (value == 0) revert Errors.ZeroValue();
         _;
     }
 
     modifier checkExpectedCaller(address caller, address expected) {
-        if (caller != expected) revert UnexpectedCaller(caller, expected);
+        if (caller != expected)
+            revert Errors.UnexpectedCaller(caller, expected);
         _;
     }
 }
