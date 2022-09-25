@@ -1,5 +1,8 @@
 node_modules
 .env
+deployments/localhost
+
+*.ignore.*
 
 #Hardhat files
 coverage
